@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../JsToCSharp.Domain/JsToCSharp.Domain.csproj" />
+  </ItemGroup>
+</Project>

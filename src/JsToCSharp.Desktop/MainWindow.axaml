@@ -1,0 +1,152 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:editor="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="JsToCSharp.Desktop.MainWindow"
+        Width="1180" Height="760"
+        MinWidth="900" MinHeight="600"
+        Title="C2X86 — Code-to-code translator">
+  <Grid Margin="24" RowDefinitions="Auto,Auto,Auto,Auto,*,Auto" RowSpacing="16">
+    <StackPanel Spacing="4">
+      <TextBlock FontSize="27" FontWeight="SemiBold" Text="C2X86" />
+      <TextBlock Opacity="0.72" Text="Code-to-code translator · 13 languages · cloud or local AI" />
+    </StackPanel>
+
+    <Grid Grid.Row="1" ColumnDefinitions="*,16,*,16,*" RowDefinitions="Auto,Auto" ColumnSpacing="0" RowSpacing="8">
+      <StackPanel Grid.Column="0" Spacing="5">
+        <TextBlock Text="From" />
+        <ComboBox x:Name="SourceLanguageBox" HorizontalAlignment="Stretch" />
+      </StackPanel>
+      <StackPanel Grid.Column="2" Spacing="5">
+        <TextBlock Text="To" />
+        <ComboBox x:Name="TargetLanguageBox" HorizontalAlignment="Stretch" />
+      </StackPanel>
+      <StackPanel Grid.Column="4" Spacing="5">
+        <TextBlock Text="AI provider" />
+        <ComboBox x:Name="ProviderBox" SelectedIndex="0" SelectionChanged="ProviderBox_OnSelectionChanged">
+          <ComboBoxItem Content="OpenAI" />
+          <ComboBoxItem Content="Google Gemini" />
+          <ComboBoxItem Content="Local Model" />
+        </ComboBox>
+      </StackPanel>
+      <StackPanel x:Name="ApiPanel" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Spacing="5">
+        <TextBlock Text="API key — used only for this translation and not saved" />
+        <TextBox x:Name="ApiKeyBox" PasswordChar="●" Watermark="Paste your API key" />
+      </StackPanel>
+      <StackPanel x:Name="ModelPanel" Grid.Row="1" Grid.Column="4" Spacing="5">
+        <TextBlock Text="Model" />
+        <ComboBox x:Name="ModelBox" PlaceholderText="Choose a model" HorizontalAlignment="Stretch"
+                  SelectionChanged="ModelBox_OnSelectionChanged" />
+        <StackPanel x:Name="CustomModelPanel" IsVisible="False" Spacing="5">
+          <TextBlock Text="Custom model ID" />
+          <TextBox x:Name="CustomModelBox" Watermark="Enter the exact API model ID" />
+        </StackPanel>
+        <TextBlock FontSize="11" Opacity="0.72" TextWrapping="Wrap"
+                   Text="AI can make mistakes. A more capable coding model may reduce errors. Always review and test the result." />
+      </StackPanel>
+      <StackPanel x:Name="LocalModelPanel" Grid.Row="1" Grid.ColumnSpan="5" IsVisible="False" Spacing="5">
+        <TextBlock Text="Local GGUF model — drop weights here or browse; runs on your CPU" />
+        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+          <Button Grid.Column="1" Click="BrowseModel_OnClick" Content="Browse…" />
+          <TextBlock x:Name="LocalModelNameText" Text="No local model selected" FontWeight="SemiBold" TextWrapping="Wrap" VerticalAlignment="Center" />
+          <Button x:Name="UnloadModelButton" Grid.Column="2" Content="Unload model" Click="UnloadModel_OnClick" IsEnabled="False" />
+        </Grid>
+        <TextBlock x:Name="ModelMemoryText" FontSize="11" Text="Model not loaded" />
+        <TextBlock FontSize="11" Opacity="0.8" TextWrapping="Wrap"
+                   Text="Using Ollama? In its models/blobs folder, select the file named sha256-… (the model weights). Do not select a manifest or Modelfile." />
+        <Expander x:Name="ModelPathExpander" Header="Model file path" IsExpanded="False" HorizontalAlignment="Stretch">
+          <TextBox x:Name="LocalModelPathBox" Watermark="Choose a .gguf file or an Ollama model blob"
+                   HorizontalAlignment="Stretch" />
+        </Expander>
+        <TextBlock FontSize="11" Opacity="0.72" TextWrapping="Wrap"
+                   Text="Code stays on this computer. Speed and accuracy depend on the model and hardware. Always review and test the result." />
+      </StackPanel>
+    </Grid>
+
+    <WrapPanel Grid.Row="2" Orientation="Horizontal">
+      <TextBlock Text="Editor font size" VerticalAlignment="Center" />
+      <Button x:Name="SmallerFontButton" Content="A−" Margin="8,0" Click="SmallerFont_OnClick" ToolTip.Tip="Decrease editor font size" />
+      <TextBlock x:Name="FontSizeText" VerticalAlignment="Center" MinWidth="24" />
+      <Button x:Name="LargerFontButton" Content="A+" Margin="8,0" Click="LargerFont_OnClick" ToolTip.Tip="Increase editor font size" />
+      <CheckBox x:Name="WordWrapBox" Content="Word wrap" />
+      <Button x:Name="UndoClearButton" Content="Undo Clear" Click="UndoClear_OnClick" IsEnabled="False" Margin="8,0" />
+      <Button Content="Find / Replace" Click="OpenSearch_OnClick" Margin="8,0" />
+      <CheckBox x:Name="RecoveryBox" Content="Save drafts for recovery (local disk)" Margin="8,0"
+                ToolTip.Tip="Off by default. Saves source and result as plaintext on this computer every 2 seconds. Disabling deletes the saved draft. API keys are never included." />
+    </WrapPanel>
+
+    <StackPanel Grid.Row="3" Spacing="5">
+      <TextBlock x:Name="RecoveryStatusText" IsVisible="False" TextWrapping="Wrap" FontSize="11" />
+      <WrapPanel x:Name="SearchPanel" IsVisible="False">
+        <ComboBox x:Name="SearchTargetBox" SelectedIndex="0" Margin="0,0,8,0">
+          <ComboBoxItem Content="Source" /><ComboBoxItem Content="Result" />
+        </ComboBox>
+        <TextBox x:Name="FindBox" Watermark="Find literal text" Width="160" />
+        <CheckBox x:Name="MatchCaseBox" Content="Match case" Margin="8,0" />
+        <Button Content="Find next" Click="FindNext_OnClick" />
+        <TextBox x:Name="ReplaceBox" Watermark="Replace with" Width="150" Margin="8,0" />
+        <Button x:Name="ReplaceButton" Content="Replace" Click="Replace_OnClick" />
+        <Button x:Name="ReplaceAllButton" Content="Replace all" Click="ReplaceAll_OnClick" Margin="8,0" />
+        <Button Content="Close" Click="CloseSearch_OnClick" />
+      </WrapPanel>
+    </StackPanel>
+
+    <Grid Grid.Row="4">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" MinWidth="280" />
+        <ColumnDefinition Width="12" />
+        <ColumnDefinition Width="*" MinWidth="200" />
+      </Grid.ColumnDefinitions>
+      <GridSplitter Grid.Column="1" Width="8" HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                    ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Background="#606060"
+                    ToolTip.Tip="Drag to resize editors" />
+      <Grid x:Name="SourceDropArea" Grid.Column="0" RowDefinitions="Auto,*" RowSpacing="8" Background="Transparent">
+        <Grid RowDefinitions="Auto,Auto" RowSpacing="4">
+          <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="SemiBold" Text="Source code" />
+          <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8">
+            <Button x:Name="ClearButton" Click="ClearSource_OnClick" Content="Clear" />
+            <Button x:Name="PasteButton" Click="PasteSource_OnClick" Content="Paste"
+                    ToolTip.Tip="Paste at the cursor or replace selected source code" />
+            <Button x:Name="ImportButton" Click="Import_OnClick" Content="Import file" />
+          </StackPanel>
+        </Grid>
+        <editor:TextEditor x:Name="SourceCodeBox" Grid.Row="1" ShowLineNumbers="True"
+                 FontFamily="Cascadia Mono, Consolas, monospace" FontSize="14" Background="#1E1E1E" Foreground="#D4D4D4"
+                 HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+      </Grid>
+      <Grid Grid.Column="2" RowDefinitions="Auto,*" RowSpacing="8">
+        <Grid RowDefinitions="Auto,Auto" RowSpacing="4">
+          <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="SemiBold" Text="Translated code" />
+          <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8">
+            <Button Click="Copy_OnClick" Content="Copy" />
+            <Button Click="Export_OnClick" Content="Export" />
+          </StackPanel>
+        </Grid>
+        <editor:TextEditor x:Name="ResultCodeBox" Grid.Row="1" IsReadOnly="True" ShowLineNumbers="True"
+                 FontFamily="Cascadia Mono, Consolas, monospace" FontSize="14" Background="#1E1E1E" Foreground="#D4D4D4"
+                 HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+      </Grid>
+    </Grid>
+
+    <Grid Grid.Row="5" ColumnDefinitions="*,Auto" ColumnSpacing="16">
+      <Grid Grid.Column="0" ColumnDefinitions="Auto,*" ColumnSpacing="9" VerticalAlignment="Center">
+        <TextBlock x:Name="ThinkingIcon" FontSize="22" IsVisible="False" VerticalAlignment="Top" Text="✦" />
+        <StackPanel Grid.Column="1" Spacing="4">
+          <Border x:Name="StatusCard" Background="#252526" BorderBrush="#3C3C3C" BorderThickness="1"
+                  CornerRadius="4" Padding="8,6">
+            <ScrollViewer MaxHeight="110" HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto">
+              <SelectableTextBlock x:Name="StatusText" Opacity="0.95" TextWrapping="Wrap"
+                                   Text="Ready. Your code is sent only when you select Translate." />
+            </ScrollViewer>
+          </Border>
+          <TextBlock x:Name="WaitTimeText" FontSize="11" Opacity="0.58" IsVisible="False" Text="Waiting: 00:00" />
+        </StackPanel>
+      </Grid>
+      <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Bottom">
+      <Button x:Name="CancelButton" Click="Cancel_OnClick" Content="Cancel" IsVisible="False" />
+      <Button x:Name="TranslateButton" Click="Translate_OnClick" MinWidth="130"
+              VerticalAlignment="Bottom" Content="Translate" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</Window>

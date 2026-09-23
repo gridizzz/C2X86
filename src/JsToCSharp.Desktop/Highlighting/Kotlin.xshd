@@ -1,0 +1,17 @@
+<SyntaxDefinition name="Kotlin" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Keyword" foreground="#569CD6" fontWeight="bold" />
+  <Color name="Comment" foreground="#6A9955" />
+  <Color name="String" foreground="#CE9178" />
+  <Color name="Number" foreground="#B5CEA8" />
+  <Color name="Type" foreground="#4EC9B0" />
+  <RuleSet>
+    <Span color="Comment" begin="//" />
+    <Span color="Comment" begin="/\*" end="\*/" multiline="true" />
+    <Span color="String" begin="&quot;&quot;&quot;" end="&quot;&quot;&quot;" multiline="true" />
+    <Span color="String" begin="&quot;" end="&quot;"><RuleSet><Span begin="\\" end="." /></RuleSet></Span>
+    <Span color="String" begin="'" end="'"><RuleSet><Span begin="\\" end="." /></RuleSet></Span>
+    <Keywords color="Keyword"><Word>as</Word><Word>break</Word><Word>by</Word><Word>catch</Word><Word>class</Word><Word>companion</Word><Word>const</Word><Word>constructor</Word><Word>continue</Word><Word>data</Word><Word>do</Word><Word>else</Word><Word>enum</Word><Word>external</Word><Word>false</Word><Word>field</Word><Word>file</Word><Word>finally</Word><Word>for</Word><Word>fun</Word><Word>get</Word><Word>if</Word><Word>import</Word><Word>in</Word><Word>init</Word><Word>inline</Word><Word>interface</Word><Word>internal</Word><Word>is</Word><Word>lateinit</Word><Word>noinline</Word><Word>object</Word><Word>open</Word><Word>operator</Word><Word>out</Word><Word>override</Word><Word>package</Word><Word>private</Word><Word>protected</Word><Word>public</Word><Word>reified</Word><Word>return</Word><Word>sealed</Word><Word>set</Word><Word>super</Word><Word>tailrec</Word><Word>this</Word><Word>throw</Word><Word>true</Word><Word>try</Word><Word>typealias</Word><Word>typeof</Word><Word>val</Word><Word>var</Word><Word>when</Word><Word>where</Word><Word>while</Word><Word>suspend</Word></Keywords>
+    <Keywords color="Type"><Word>Any</Word><Word>Boolean</Word><Word>Byte</Word><Word>Char</Word><Word>Double</Word><Word>Float</Word><Word>Int</Word><Word>Long</Word><Word>Nothing</Word><Word>Short</Word><Word>String</Word><Word>Unit</Word></Keywords>
+    <Rule color="Number">\b(?:0[xX][0-9a-fA-F_]+|0[bB][01_]+|[0-9][0-9_]*(?:\.[0-9_]+)?(?:[eE][+-]?[0-9_]+)?)[fFL]?</Rule>
+  </RuleSet>
+</SyntaxDefinition>

@@ -1,0 +1,11 @@
+<SyntaxDefinition name="TypeScript" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Keyword" foreground="Blue" fontWeight="bold" />
+  <Color name="Comment" foreground="Green" />
+  <Color name="String" foreground="Brown" />
+  <Color name="Number" foreground="DarkCyan" />
+  <RuleSet>
+    <Span color="String" begin="`" end="`" multiline="true"><RuleSet><Span begin="\\" end="." /></RuleSet></Span>
+    <Keywords color="Keyword"><Word>abstract</Word><Word>any</Word><Word>as</Word><Word>asserts</Word><Word>async</Word><Word>await</Word><Word>bigint</Word><Word>boolean</Word><Word>break</Word><Word>case</Word><Word>catch</Word><Word>class</Word><Word>const</Word><Word>constructor</Word><Word>continue</Word><Word>debugger</Word><Word>declare</Word><Word>default</Word><Word>delete</Word><Word>do</Word><Word>else</Word><Word>enum</Word><Word>export</Word><Word>extends</Word><Word>false</Word><Word>finally</Word><Word>for</Word><Word>from</Word><Word>function</Word><Word>get</Word><Word>if</Word><Word>implements</Word><Word>import</Word><Word>in</Word><Word>infer</Word><Word>instanceof</Word><Word>interface</Word><Word>is</Word><Word>keyof</Word><Word>let</Word><Word>module</Word><Word>namespace</Word><Word>never</Word><Word>new</Word><Word>null</Word><Word>number</Word><Word>object</Word><Word>of</Word><Word>override</Word><Word>private</Word><Word>protected</Word><Word>public</Word><Word>readonly</Word><Word>require</Word><Word>return</Word><Word>satisfies</Word><Word>set</Word><Word>static</Word><Word>string</Word><Word>super</Word><Word>switch</Word><Word>symbol</Word><Word>this</Word><Word>throw</Word><Word>true</Word><Word>try</Word><Word>type</Word><Word>typeof</Word><Word>undefined</Word><Word>unique</Word><Word>unknown</Word><Word>var</Word><Word>void</Word><Word>while</Word><Word>with</Word><Word>yield</Word></Keywords>
+    <Import ruleSet="JavaScript/" />
+  </RuleSet>
+</SyntaxDefinition>

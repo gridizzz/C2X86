@@ -1,0 +1,22 @@
+C2X86 development commands
+
+Install the .NET 8 SDK from https://dotnet.microsoft.com/download/dotnet/8.0
+Open a terminal in the repository root. Run as your normal desktop user.
+
+dotnet restore JsToCSharp.sln -m:1
+dotnet build JsToCSharp.sln --configuration Debug --no-restore -m:1
+dotnet test JsToCSharp.sln --configuration Debug --no-build -m:1
+dotnet run --project src/JsToCSharp.Desktop/JsToCSharp.Desktop.csproj
+
+Release packaging (requires Python 3.11+; use python on Windows):
+python3 scripts/package_release.py
+python3 scripts/stage_github.py
+
+See docs/release.md for platform dependencies, downloads, and GitHub publishing.
+Run the GUI in a graphical desktop session, not as root or over headless SSH.
+If build output is owned by another account, correct ownership of generated
+bin/obj directories before restoring. Do not delete source files.
+
+Never put API keys in commands, commits, logs, issues, or screenshots.
+Enter keys in the app's masked field. They remain in memory only.
+Draft recovery is off by default; enabling it saves code as plaintext locally.

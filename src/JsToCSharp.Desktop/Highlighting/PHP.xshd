@@ -1,0 +1,19 @@
+<SyntaxDefinition name="PHP" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Keyword" foreground="#569CD6" fontWeight="bold" />
+  <Color name="Comment" foreground="#6A9955" />
+  <Color name="String" foreground="#CE9178" />
+  <Color name="Number" foreground="#B5CEA8" />
+  <Color name="Type" foreground="#4EC9B0" />
+  <Color name="Variable" foreground="#9CDCFE" />
+  <RuleSet>
+    <Span color="Comment" begin="//" />
+    <Span color="Comment" begin="#" />
+    <Span color="Comment" begin="/\*" end="\*/" multiline="true" />
+    <Span color="String" begin="&quot;" end="&quot;"><RuleSet><Span begin="\\" end="." /></RuleSet></Span>
+    <Span color="String" begin="'" end="'"><RuleSet><Span begin="\\" end="." /></RuleSet></Span>
+    <Rule color="Variable">\$[A-Za-z_][A-Za-z0-9_]*</Rule>
+    <Keywords color="Keyword"><Word>__halt_compiler</Word><Word>abstract</Word><Word>and</Word><Word>array</Word><Word>as</Word><Word>break</Word><Word>callable</Word><Word>case</Word><Word>catch</Word><Word>class</Word><Word>clone</Word><Word>const</Word><Word>continue</Word><Word>declare</Word><Word>default</Word><Word>die</Word><Word>do</Word><Word>echo</Word><Word>else</Word><Word>elseif</Word><Word>empty</Word><Word>enddeclare</Word><Word>endfor</Word><Word>endforeach</Word><Word>endif</Word><Word>endswitch</Word><Word>endwhile</Word><Word>enum</Word><Word>eval</Word><Word>exit</Word><Word>extends</Word><Word>final</Word><Word>finally</Word><Word>fn</Word><Word>for</Word><Word>foreach</Word><Word>function</Word><Word>global</Word><Word>goto</Word><Word>if</Word><Word>implements</Word><Word>include</Word><Word>include_once</Word><Word>instanceof</Word><Word>insteadof</Word><Word>interface</Word><Word>isset</Word><Word>list</Word><Word>match</Word><Word>namespace</Word><Word>new</Word><Word>or</Word><Word>print</Word><Word>private</Word><Word>protected</Word><Word>public</Word><Word>readonly</Word><Word>require</Word><Word>require_once</Word><Word>return</Word><Word>static</Word><Word>switch</Word><Word>throw</Word><Word>trait</Word><Word>try</Word><Word>unset</Word><Word>use</Word><Word>var</Word><Word>while</Word><Word>xor</Word><Word>yield</Word><Word>true</Word><Word>false</Word><Word>null</Word></Keywords>
+    <Keywords color="Type"><Word>bool</Word><Word>boolean</Word><Word>int</Word><Word>float</Word><Word>string</Word><Word>void</Word><Word>iterable</Word><Word>object</Word><Word>mixed</Word><Word>never</Word></Keywords>
+    <Rule color="Number">\b(?:0[xX][0-9a-fA-F_]+|0[bB][01_]+|[0-9][0-9_]*(?:\.[0-9_]+)?(?:[eE][+-]?[0-9_]+)?)\b</Rule>
+  </RuleSet>
+</SyntaxDefinition>

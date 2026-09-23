@@ -1,0 +1,32 @@
+# .NET build output
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# IDE and editor files
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Local settings and secrets
+appsettings.Local.json
+.env
+.env.*
+!.env.example
+
+# Test and tooling output
+TestResults/
+coverage/
+*.coverage
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+
+# Generated distribution and upload staging
+artifacts/
+release-assets/
+.uploadtogithub/

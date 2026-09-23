@@ -1,0 +1,15 @@
+<SyntaxDefinition name="Go" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Keyword" foreground="Blue" fontWeight="bold" />
+  <Color name="Comment" foreground="Green" />
+  <Color name="String" foreground="Brown" />
+  <Color name="Number" foreground="DarkCyan" />
+  <RuleSet>
+    <Span color="Comment" begin="//" />
+    <Span color="Comment" begin="/\*" end="\*/" multiline="true" />
+    <Span color="String" begin="&quot;" end="&quot;"><RuleSet><Span begin="\\" end="." /></RuleSet></Span>
+    <Rule color="String">'(?:\\.|[^'\\\r\n])'</Rule>
+    <Span color="String" begin="`" end="`" multiline="true" />
+    <Keywords color="Keyword"><Word>break</Word><Word>default</Word><Word>func</Word><Word>interface</Word><Word>select</Word><Word>case</Word><Word>defer</Word><Word>go</Word><Word>map</Word><Word>struct</Word><Word>chan</Word><Word>else</Word><Word>goto</Word><Word>package</Word><Word>switch</Word><Word>const</Word><Word>fallthrough</Word><Word>if</Word><Word>range</Word><Word>type</Word><Word>continue</Word><Word>for</Word><Word>import</Word><Word>return</Word><Word>var</Word><Word>bool</Word><Word>byte</Word><Word>complex64</Word><Word>complex128</Word><Word>error</Word><Word>float32</Word><Word>float64</Word><Word>int</Word><Word>int8</Word><Word>int16</Word><Word>int32</Word><Word>int64</Word><Word>rune</Word><Word>string</Word><Word>uint</Word><Word>uint8</Word><Word>uint16</Word><Word>uint32</Word><Word>uint64</Word><Word>uintptr</Word><Word>true</Word><Word>false</Word><Word>nil</Word><Word>iota</Word></Keywords>
+    <Rule color="Number">\b(?:0[xX][0-9a-fA-F_]+|0[bB][01_]+|[0-9][0-9_]*(?:\.[0-9_]+)?(?:[eE][+-]?[0-9_]+)?)\b</Rule>
+  </RuleSet>
+</SyntaxDefinition>

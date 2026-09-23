@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>C2X86</AssemblyName>
+    <RootNamespace>JsToCSharp.Desktop</RootNamespace>
+    <UseCompiledBindingsByDefault>true</UseCompiledBindingsByDefault>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Highlighting/*.xshd" />
+    <PackageReference Include="Avalonia.AvaloniaEdit" Version="11.3.0" />
+    <PackageReference Include="Avalonia" Version="11.3.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.0" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.0" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../JsToCSharp.Application/JsToCSharp.Application.csproj" />
+    <ProjectReference Include="../JsToCSharp.Infrastructure/JsToCSharp.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

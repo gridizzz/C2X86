@@ -1,0 +1,17 @@
+<SyntaxDefinition name="Swift" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Keyword" foreground="#569CD6" fontWeight="bold" />
+  <Color name="Comment" foreground="#6A9955" />
+  <Color name="String" foreground="#CE9178" />
+  <Color name="Number" foreground="#B5CEA8" />
+  <Color name="Type" foreground="#4EC9B0" />
+  <RuleSet>
+    <Span color="Comment" begin="//" />
+    <Span color="Comment" begin="/\*" end="\*/" multiline="true" />
+    <Span color="String" begin="&quot;&quot;&quot;" end="&quot;&quot;&quot;" multiline="true" />
+    <Span color="String" begin="&quot;" end="&quot;"><RuleSet><Span begin="\\" end="." /></RuleSet></Span>
+    <Span color="String" begin="'" end="'" />
+    <Keywords color="Keyword"><Word>associatedtype</Word><Word>break</Word><Word>case</Word><Word>catch</Word><Word>class</Word><Word>continue</Word><Word>default</Word><Word>defer</Word><Word>do</Word><Word>else</Word><Word>enum</Word><Word>extension</Word><Word>fallthrough</Word><Word>false</Word><Word>for</Word><Word>func</Word><Word>guard</Word><Word>if</Word><Word>import</Word><Word>in</Word><Word>init</Word><Word>inout</Word><Word>is</Word><Word>let</Word><Word>nil</Word><Word>operator</Word><Word>private</Word><Word>protocol</Word><Word>public</Word><Word>repeat</Word><Word>return</Word><Word>self</Word><Word>static</Word><Word>struct</Word><Word>subscript</Word><Word>super</Word><Word>switch</Word><Word>throw</Word><Word>true</Word><Word>try</Word><Word>typealias</Word><Word>var</Word><Word>where</Word><Word>while</Word><Word>async</Word><Word>await</Word><Word>throws</Word><Word>some</Word><Word>any</Word><Word>override</Word><Word>final</Word><Word>open</Word><Word>internal</Word><Word>fileprivate</Word><Word>weak</Word><Word>unowned</Word></Keywords>
+    <Keywords color="Type"><Word>Bool</Word><Word>Character</Word><Word>Double</Word><Word>Float</Word><Word>Int</Word><Word>String</Word><Word>UInt</Word><Word>Void</Word><Word>Array</Word><Word>Dictionary</Word><Word>Set</Word></Keywords>
+    <Rule color="Number">\b(?:0[xX][0-9a-fA-F_]+|0[bB][01_]+|0[oO][0-7_]+|[0-9][0-9_]*(?:\.[0-9_]+)?(?:[eE][+-]?[0-9_]+)?)\b</Rule>
+  </RuleSet>
+</SyntaxDefinition>
